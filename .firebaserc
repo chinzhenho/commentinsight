@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "default": "fyp2-12d75"
+  },
+  "targets": {
+    "fyp2-12d75": {
+      "hosting": {
+        "main": [
+          "commentinsight"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

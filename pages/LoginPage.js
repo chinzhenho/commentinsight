@@ -53,7 +53,7 @@ async function handleSubmit(event) {
     showToast("Welcome back!", "success");
 
     setTimeout(() => {
-      window.location.href = "AnalyzePage.html";
+      window.location.href = "/analyze";
     }, 1000);
   } catch (error) {
     showError(getFirebaseErrorMessage(error));
@@ -92,14 +92,14 @@ async function handleForgotPassword() {
  */
 function setupRegisterLink() {
   const registerLink = document.querySelector(
-    '.form-footer a[href="RegisterPage.html"], .form-footer a[href="/register"]'
+    '.form-footer a[href="/register"], .form-footer a[href="/register"]'
   );
 
   if (!registerLink) return;
 
   registerLink.addEventListener("click", (event) => {
     event.preventDefault();
-    window.location.href = "RegisterPage.html";
+    window.location.href = "/register";
   });
 }
 

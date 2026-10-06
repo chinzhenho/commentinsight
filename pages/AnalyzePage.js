@@ -24,7 +24,7 @@ const MODELS = [
 
 const MODEL_ORDER = ['SVM', 'LR', 'NB'];
 
-const PREDICT_API_URL = 'http://127.0.0.1:5000/predict';
+const PREDICT_API_URL = 'https://commentinsight-5fwp.onrender.com/predict';
 
 const sentimentCharts = {};
 let vaderDoughnutChart = null;
@@ -912,7 +912,7 @@ async function handleLogout() {
     showToast('Logged out successfully', 'info');
 
     setTimeout(() => {
-      window.location.href = 'LandingPage.html';
+      window.location.href = '/';
     }, 1000);
   } catch (error) {
     showToast(error.message || 'Logout failed', 'error');

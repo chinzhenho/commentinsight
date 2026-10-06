@@ -293,7 +293,7 @@ async function handleLogout() {
     showToast("Logged out successfully", "info");
 
     setTimeout(() => {
-      window.location.href = "LandingPage.html";
+      window.location.href = "/";
     }, 1000);
   } catch (error) {
     showToast(error.message || "Logout failed", "error");

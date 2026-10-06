@@ -1,0 +1,71 @@
+{
+  "hosting": {
+    "target": "main",
+    "public": "pages",
+    "ignore": [
+      "firebase.json",
+      "**/.*"
+    ],
+    "redirects": [
+      {
+        "source": "/LandingPage.html",
+        "destination": "/",
+        "type": 301
+      },
+      {
+        "source": "/LoginPage.html",
+        "destination": "/login",
+        "type": 301
+      },
+      {
+        "source": "/RegisterPage.html",
+        "destination": "/register",
+        "type": 301
+      },
+      {
+        "source": "/AnalyzePage.html",
+        "destination": "/analyze",
+        "type": 301
+      },
+      {
+        "source": "/HistoryPage.html",
+        "destination": "/history",
+        "type": 301
+      },
+      {
+        "source": "/ProfilePage.html",
+        "destination": "/profile",
+        "type": 301
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/",
+        "destination": "/LandingPage.html"
+      },
+      {
+        "source": "/login",
+        "destination": "/LoginPage.html"
+      },
+      {
+        "source": "/register",
+        "destination": "/RegisterPage.html"
+      },
+      {
+        "source": "/analyze",
+        "destination": "/AnalyzePage.html"
+      },
+      {
+        "source": "/history",
+        "destination": "/HistoryPage.html"
+      },
+      {
+        "source": "/profile",
+        "destination": "/ProfilePage.html"
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules"
+  }
+}

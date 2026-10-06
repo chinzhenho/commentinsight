@@ -9,17 +9,17 @@ function initializeLandingPage() {
 }
 
 function setupNavigation() {
-  document.querySelectorAll('a[href="LoginPage.html"]').forEach((link) => {
+  document.querySelectorAll('a[href="/login"]').forEach((link) => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
-      window.location.href = 'LoginPage.html';
+      window.location.href = '/login';
     });
   });
 
-  document.querySelectorAll('a[href="RegisterPage.html"]').forEach((link) => {
+  document.querySelectorAll('a[href="/register"]').forEach((link) => {
     link.addEventListener('click', (event) => {
       event.preventDefault();
-      window.location.href = 'RegisterPage.html';
+      window.location.href = '/register';
     });
   });
 

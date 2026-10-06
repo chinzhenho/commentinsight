@@ -211,7 +211,7 @@ async function handleSubmit(event) {
     showToast("Account created successfully!", "success");
 
     setTimeout(() => {
-      window.location.href = "AnalyzePage.html";
+      window.location.href = "/analyze";
     }, 1000);
   } catch (error) {
     setLoading(false);
@@ -225,14 +225,14 @@ async function handleSubmit(event) {
 
 function setupLoginLink() {
   const loginLink = document.querySelector(
-    '.form-footer a[href="LoginPage.html"], .form-footer a[href="/login"]'
+    '.form-footer a[href="/login"], .form-footer a[href="/login"]'
   );
 
   if (!loginLink) return;
 
   loginLink.addEventListener("click", (event) => {
     event.preventDefault();
-    window.location.href = "LoginPage.html";
+    window.location.href = "/login";
   });
 }
 

@@ -265,7 +265,7 @@ function renderEmptyState() {
   const button = emptyState.querySelector('.empty-action');
 
   button.addEventListener('click', () => {
-    window.location.href = 'AnalyzePage.html';
+    window.location.href = '/analyze';
   });
 
   container.appendChild(emptyState);
@@ -1134,7 +1134,7 @@ async function handleLogout() {
     showToast('Logged out successfully', 'success');
 
     setTimeout(() => {
-      window.location.href = 'LandingPage.html';
+      window.location.href = '/';
     }, 1000);
   } catch (error) {
     showToast(error.message || 'Logout failed', 'error');

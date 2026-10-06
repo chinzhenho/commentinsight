@@ -3,9 +3,9 @@
  */
 (function () {
   const pageMap = {
-    '/analyze': 'AnalyzePage.html',
-    '/history': 'HistoryPage.html',
-    '/profile': 'ProfilePage.html',
+    '/analyze': '/analyze',
+    '/history': '/history',
+    '/profile': '/profile',
   };
 
   function init(currentPath, options = {}) {
@@ -37,7 +37,7 @@
   }
 
   function defaultLogout() {
-    window.location.href = 'LandingPage.html';
+    window.location.href = '/';
   }
 
   window.CommentInsightNavbar = { init };
