@@ -2,3 +2,4 @@ pages/FirebaseKeys.js
 backend/chatgpt1.csv
 __pycache__/
 .vscode/
+.firebase/
