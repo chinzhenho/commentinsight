@@ -1,0 +1,449 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu,
+    Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  color: #f8fafc;
+  background:
+    radial-gradient(circle at 80% 12%, rgba(124, 58, 237, 0.2), transparent 28%),
+    radial-gradient(circle at 10% 80%, rgba(37, 99, 235, 0.14), transparent 30%),
+    linear-gradient(180deg, #070a18 0%, #0a0f21 55%, #070a18 100%);
+}
+
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 500px;
+  padding: 1.45rem;
+  border-radius: 1.25rem;
+  background:
+    radial-gradient(circle at top right, rgba(139, 92, 246, 0.16), transparent 34%),
+    linear-gradient(180deg, rgba(15, 23, 42, 0.92), rgba(8, 15, 34, 0.94));
+  border: 1px solid rgba(124, 58, 237, 0.34);
+  box-shadow:
+    0 22px 58px rgba(0, 0, 0, 0.36),
+    0 0 0 1px rgba(255, 255, 255, 0.03) inset;
+}
+
+/* Back Button */
+
+.back-home-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  width: fit-content;
+  margin-bottom: 0.95rem;
+  color: #93a4c2;
+  font-size: 0.82rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-home-link span {
+  font-size: 0.95rem;
+  line-height: 1;
+}
+
+.back-home-link:hover {
+  color: #c4b5fd;
+  transform: translateX(-2px);
+}
+
+/* Header */
+
+.register-header {
+  margin-bottom: 1.25rem;
+}
+
+.register-header h1 {
+  font-size: 1.85rem;
+  line-height: 1.1;
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: #ffffff;
+  margin-bottom: 0.55rem;
+}
+
+.register-header p {
+  max-width: 430px;
+  font-size: 0.88rem;
+  line-height: 1.62;
+  color: #aeb8cc;
+}
+
+/* Form */
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+label {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #a78bfa;
+  pointer-events: none;
+}
+
+.input-icon svg {
+  width: 0.92rem;
+  height: 0.92rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  height: 3.05rem;
+  padding: 0 2.85rem 0 2.45rem;
+  border-radius: 0.82rem;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  background: rgba(3, 9, 27, 0.88);
+  color: #f8fafc;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+input::placeholder {
+  color: #6b7a96;
+}
+
+input:focus {
+  outline: none;
+  border-color: rgba(124, 58, 237, 0.7);
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.16);
+  background: rgba(4, 11, 32, 0.96);
+}
+
+.password-toggle {
+  position: absolute;
+  right: 0.7rem;
+  width: 1.8rem;
+  height: 1.8rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  color: #94a3b8;
+  cursor: pointer;
+}
+
+.password-toggle svg {
+  width: 0.95rem;
+  height: 0.95rem;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.password-toggle:hover {
+  color: #c4b5fd;
+}
+
+/* Password Rules */
+
+.password-rules {
+  display: grid;
+  gap: 0.3rem;
+  list-style: none;
+  margin-top: 0.05rem;
+}
+
+.password-rules li {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.74rem;
+  color: #94a3b8;
+  transition: color 0.2s ease;
+}
+
+.rule-icon {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 999px;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  background: transparent;
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.password-rules li.valid {
+  color: #22c55e;
+}
+
+.password-rules li.valid .rule-icon {
+  background: rgba(34, 197, 94, 0.16);
+  border-color: rgba(34, 197, 94, 0.45);
+}
+
+.password-rules li.valid .rule-icon::after {
+  content: "";
+  position: absolute;
+  left: 0.18rem;
+  top: 0.08rem;
+  width: 0.18rem;
+  height: 0.36rem;
+  border: solid #22c55e;
+  border-width: 0 1.8px 1.8px 0;
+  transform: rotate(45deg);
+}
+
+.field-error {
+  font-size: 0.76rem;
+  color: #f87171;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* Button */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  height: 3.05rem;
+  padding: 0 1rem;
+  border: none;
+  border-radius: 0.85rem;
+  font-size: 0.92rem;
+  font-weight: 900;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+}
+
+.btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.btn-full {
+  width: 100%;
+  margin-top: 0.15rem;
+}
+
+.btn-primary {
+  color: #ffffff;
+  background: linear-gradient(135deg, #2563eb 0%, #8b5cf6 100%);
+  box-shadow: 0 14px 30px rgba(79, 70, 229, 0.26);
+}
+
+.btn-primary:hover:not(:disabled) {
+  box-shadow: 0 18px 36px rgba(79, 70, 229, 0.34);
+}
+
+.btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.spinner {
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 2.5px solid rgba(255, 255, 255, 0.42);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.form-footer {
+  margin-top: 0.05rem;
+  text-align: center;
+  color: #aeb8cc;
+  font-size: 0.84rem;
+}
+
+.link {
+  color: #8b5cf6;
+  font-weight: 800;
+  text-decoration: none;
+}
+
+.link:hover {
+  color: #a78bfa;
+}
+
+/* Toast */
+
+.toast-container {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  z-index: 999;
+}
+
+.toast {
+  min-width: 240px;
+  max-width: 320px;
+  padding: 0.9rem 1rem;
+  border-radius: 0.8rem;
+  background-color: #0f172a;
+  color: #f8fafc;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.28);
+  font-size: 0.9rem;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+.toast.success {
+  background-color: #052e16;
+  border-color: rgba(34, 197, 94, 0.4);
+  color: #bbf7d0;
+}
+
+.toast.info {
+  background-color: #172554;
+  border-color: rgba(59, 130, 246, 0.4);
+  color: #bfdbfe;
+}
+
+.toast.error {
+  background-color: #450a0a;
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fecaca;
+}
+
+.toast-exit {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+
+@media (max-width: 640px) {
+  .register-page {
+    padding: 0.8rem;
+  }
+
+  .register-card {
+    max-width: 100%;
+    padding: 1.2rem;
+    border-radius: 1.1rem;
+  }
+
+  .register-header h1 {
+    font-size: 1.55rem;
+  }
+
+  .register-header p {
+    font-size: 0.82rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    height: 2.9rem;
+  }
+
+  .btn {
+    height: 2.95rem;
+  }
+}
+
+@media (max-height: 760px) {
+  .register-page {
+    align-items: flex-start;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+  }
+
+  .register-card {
+    padding: 1.15rem;
+  }
+
+  .back-home-link {
+    margin-bottom: 0.65rem;
+  }
+
+  .register-header {
+    margin-bottom: 0.9rem;
+  }
+
+  .register-header h1 {
+    font-size: 1.55rem;
+    margin-bottom: 0.35rem;
+  }
+
+  .register-header p {
+    font-size: 0.8rem;
+    line-height: 1.45;
+  }
+
+  .register-form {
+    gap: 0.68rem;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"] {
+    height: 2.75rem;
+  }
+
+  .btn {
+    height: 2.8rem;
+  }
+
+  .password-rules {
+    gap: 0.2rem;
+  }
+
+  .password-rules li {
+    font-size: 0.68rem;
+  }
+}

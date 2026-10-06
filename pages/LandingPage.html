@@ -1,0 +1,720 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CommentInsight - Sentiment Analysis</title>
+  <link rel="icon" type="image/png" href="assets/commentinsight-icon.png" />
+  <link rel="stylesheet" href="LandingPage.css" />
+</head>
+<body>
+  <div class="landing-page">
+    <!-- Navbar -->
+    <header class="navbar">
+      <div class="navbar-inner">
+        <div class="nav-left">
+          <a href="#home" class="brand" aria-label="CommentInsight Home">
+            <span class="brand-logo-wrap">
+              <img
+                src="assets/commentinsight-logo.png"
+                alt="CommentInsight logo"
+                class="brand-logo-img"
+              />
+            </span>
+
+            <span class="brand-name">
+              Comment<span class="brand-name-accent">Insight</span>
+            </span>
+          </a>
+        </div>
+
+        <nav class="nav-links" aria-label="Landing page navigation">
+          <a href="#how-it-works">How It Works</a>
+          <a href="#features">Features</a>
+          <a href="#models">Models</a>
+          <a href="#about">About</a>
+        </nav>
+
+        <div class="nav-actions">
+          <a href="LoginPage.html" class="btn btn-outline">Login</a>
+          <a href="RegisterPage.html" class="btn btn-primary">Register</a>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <!-- Hero -->
+      <section id="home" class="hero-section">
+        <div class="hero-bg-glow hero-bg-glow-left"></div>
+        <div class="hero-bg-glow hero-bg-glow-right"></div>
+
+        <div class="hero-container">
+          <div class="hero-content">
+            <h1>
+              <span>Transform Social Media</span>
+              <span>Comments into</span>
+              <span class="highlight-text">Sentiment Insights</span>
+            </h1>
+
+            <p>
+              CommentInsight uses machine learning techniques to analyze social media
+              comments and identify positive, neutral, and negative sentiment.
+              Compare model predictions, view extra supporting scores, and manage
+              saved analysis results in one web application.
+            </p>
+
+            <div class="hero-buttons">
+              <a href="#how-it-works" class="btn btn-primary btn-hero">How It Works</a>
+              <a href="LoginPage.html" class="btn btn-outline btn-hero">Try CommentInsight</a>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="orb">
+              <div class="orb-highlight"></div>
+              <div class="orb-dots"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works -->
+      <section id="how-it-works" class="section section-soft">
+        <div class="section-container">
+          <div class="section-heading">
+            <span class="section-kicker">Workflow</span>
+            <h2>How CommentInsight Works</h2>
+            <p>
+              CommentInsight follows a simple step-by-step workflow from comment input
+              to sentiment results, saved history, and CSV export.
+            </p>
+          </div>
+
+          <div class="workflow-timeline">
+            <!-- Step 01 -->
+            <article class="workflow-card">
+              <span class="workflow-number">01</span>
+
+              <div class="workflow-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4.75 6.75C4.75 5.65 5.65 4.75 6.75 4.75H17.25C18.35 4.75 19.25 5.65 19.25 6.75V14.25C19.25 15.35 18.35 16.25 17.25 16.25H10L5.25 19.25V16.25H6.75C5.65 16.25 4.75 15.35 4.75 14.25V6.75Z"></path>
+                  <path d="M8 9H16"></path>
+                  <path d="M8 12H13"></path>
+                </svg>
+              </div>
+
+              <h3>Enter Comments</h3>
+              <p>
+                Users enter up to 5 social media comments into the analysis form.
+              </p>
+            </article>
+
+            <!-- Step 02 -->
+            <article class="workflow-card">
+              <span class="workflow-number">02</span>
+
+              <div class="workflow-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 7H17"></path>
+                  <path d="M14 4L17 7L14 10"></path>
+                  <path d="M17 17H7"></path>
+                  <path d="M10 14L7 17L10 20"></path>
+                </svg>
+              </div>
+
+              <h3>Select Models</h3>
+              <p>
+                SVM is used as the primary model. Logistic Regression and Naive Bayes
+                can be selected optionally for comparison.
+              </p>
+            </article>
+
+            <!-- Step 03 -->
+            <article class="workflow-card">
+              <span class="workflow-number">03</span>
+
+              <div class="workflow-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 5.5H14.5"></path>
+                  <path d="M5 9H12"></path>
+                  <path d="M5 12.5H10"></path>
+                  <circle cx="15.5" cy="15.5" r="3.25"></circle>
+                  <path d="M18 18L20.5 20.5"></path>
+                </svg>
+              </div>
+
+              <h3>Analyze Comments</h3>
+              <p>
+                The system processes the comments using the selected machine learning
+                models and generates sentiment predictions.
+              </p>
+            </article>
+
+            <!-- Step 04 -->
+            <article class="workflow-card">
+              <span class="workflow-number">04</span>
+
+              <div class="workflow-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M5 19H19"></path>
+                  <path d="M6.5 19V6"></path>
+                  <path d="M10 16V12"></path>
+                  <path d="M14 16V8"></path>
+                  <path d="M18 16V10"></path>
+                </svg>
+              </div>
+
+              <h3>View Results</h3>
+              <p>
+                Users can review sentiment labels, charts, per-comment predictions,
+                and extra sentiment scores.
+              </p>
+            </article>
+
+            <!-- Step 05 -->
+            <article class="workflow-card">
+              <span class="workflow-number">05</span>
+
+              <div class="workflow-icon">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M7 3.75H14.25L18 7.5V20.25H7V3.75Z"></path>
+                  <path d="M14 3.75V8H18"></path>
+                  <path d="M12 11.5V16.5"></path>
+                  <path d="M9.75 14.25L12 16.5L14.25 14.25"></path>
+                  <path d="M9 18.25H15"></path>
+                </svg>
+              </div>
+
+              <h3>Save / Download History</h3>
+              <p>
+                Analysis results are saved into history. Users can download one record as CSV
+                or export selected records into one combined CSV file.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Features -->
+      <section id="features" class="section features-section">
+        <div class="section-container">
+          <div class="section-heading">
+            <span class="section-kicker">Key Features</span>
+            <h2>Sentiment Analysis Features Built for Clear Results</h2>
+            <p>
+              CommentInsight provides the main tools needed to analyze comments, compare machine learning models,
+              inspect supporting scores, save analysis records, and export results.
+            </p>
+          </div>
+
+          <div class="features-showcase">
+            <div class="feature-showcase-main">
+              <div class="showcase-label">Main Capability</div>
+
+              <div class="showcase-layout">
+                <div class="showcase-content">
+                  <h3>Analyze comments with machine learning models</h3>
+
+                  <p>
+                    CommentInsight helps users classify social media comments into positive,
+                    neutral, or negative sentiment using machine learning models and supporting
+                    sentiment scores.
+                  </p>
+
+                  <div class="showcase-checklist">
+                    <div class="check-item">
+                      <span>✓</span>
+                      <p>Enter up to 5 social media comments for each analysis.</p>
+                    </div>
+
+                    <div class="check-item">
+                      <span>✓</span>
+                      <p>Use SVM as the primary model and optionally compare results with LR or NB.</p>
+                    </div>
+
+                    <div class="check-item">
+                      <span>✓</span>
+                      <p>Review sentiment labels, charts, VADER scores, and TextBlob values.</p>
+                    </div>
+
+                    <div class="check-item">
+                      <span>✓</span>
+                      <p>Download one history record or export selected history records into one combined CSV file.</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="capability-panel">
+                  <div class="capability-header">
+                    <span>System Capability</span>
+                  </div>
+
+                  <div class="capability-list">
+                    <div class="capability-row">
+                      <span>Input</span>
+                      <strong>Up to 5 Comments</strong>
+                    </div>
+
+                    <div class="capability-row">
+                      <span>Primary Model</span>
+                      <strong>SVM</strong>
+                    </div>
+
+                    <div class="capability-row">
+                      <span>Optional Comparison</span>
+                      <strong>LR / NB</strong>
+                    </div>
+
+                    <div class="capability-row">
+                      <span>Extra Scores</span>
+                      <strong>VADER / TextBlob</strong>
+                    </div>
+
+                    <div class="capability-row">
+                      <span>History Export</span>
+                      <strong>Single / Combined CSV</strong>
+                    </div>
+
+                    <div class="capability-row">
+                      <span>Output</span>
+                      <strong>Positive / Neutral / Negative</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="feature-showcase-side">
+              <div class="mini-result-card">
+                <div class="mini-result-header">
+                  <span>Sentiment Overview</span>
+                  <strong>5 Comments</strong>
+                </div>
+
+                <div class="mini-stat-grid">
+                  <div class="mini-stat-card stat-positive">
+                    <span>Positive</span>
+                    <strong>2</strong>
+                  </div>
+
+                  <div class="mini-stat-card stat-neutral">
+                    <span>Neutral</span>
+                    <strong>2</strong>
+                  </div>
+
+                  <div class="mini-stat-card stat-negative">
+                    <span>Negative</span>
+                    <strong>1</strong>
+                  </div>
+                </div>
+
+                <div class="mini-real-chart">
+                  <div class="mini-y-axis">
+                    <span>5</span>
+                    <span>4</span>
+                    <span>3</span>
+                    <span>2</span>
+                    <span>1</span>
+                    <span>0</span>
+                  </div>
+
+                  <div class="mini-chart-area">
+                    <div class="mini-grid-lines"></div>
+
+                    <div class="mini-chart-bars">
+                      <div class="mini-bar-group">
+                        <span class="mini-bar positive-bar-real"></span>
+                        <small>Positive</small>
+                      </div>
+
+                      <div class="mini-bar-group">
+                        <span class="mini-bar neutral-bar-real"></span>
+                        <small>Neutral</small>
+                      </div>
+
+                      <div class="mini-bar-group">
+                        <span class="mini-bar negative-bar-real"></span>
+                        <small>Negative</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+          <div class="feature-grid detailed-feature-grid">
+            <!-- Core Features -->
+            <article class="feature-card core-feature">
+              <div class="feature-card-top">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M5 5.5H14.5"></path>
+                    <path d="M5 9H12"></path>
+                    <path d="M5 12.5H10"></path>
+                    <circle cx="15.5" cy="15.5" r="3.25"></circle>
+                    <path d="M18 18L20.5 20.5"></path>
+                  </svg>
+                </div>
+
+                <span class="feature-tag">Core</span>
+              </div>
+
+              <h3>Comment Analysis</h3>
+              <p>
+                Enter social media comments and classify each comment into positive, neutral,
+                or negative sentiment using the selected machine learning model.
+              </p>
+            </article>
+
+            <article class="feature-card core-feature">
+              <div class="feature-card-top">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 7h10"></path>
+                    <path d="M14 4l3 3-3 3"></path>
+                    <path d="M17 17H7"></path>
+                    <path d="M10 14l-3 3 3 3"></path>
+                  </svg>
+                </div>
+                <span class="feature-tag">Optional</span>
+              </div>
+
+              <h3>Optional Model Comparison</h3>
+              <p>
+                Use SVM as the primary model and optionally compare predictions with
+                Logistic Regression and Naive Bayes.
+              </p>
+            </article>
+
+            <article class="feature-card core-feature">
+              <div class="feature-card-top">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M4 19h16"></path>
+                    <path d="M4 5v14"></path>
+                    <path d="M8 16v-5"></path>
+                    <path d="M12 16V8"></path>
+                    <path d="M16 16v-3"></path>
+                    <path d="M19 5l-3 3-3-2-4 4"></path>
+                  </svg>
+                </div>
+                <span class="feature-tag">Visual</span>
+              </div>
+
+              <h3>Result Summary</h3>
+              <p>
+                Review sentiment counts, prediction labels, and visual summaries in a clean
+                result interface.
+              </p>
+            </article>
+
+            <!-- Supporting Features -->
+            <article class="feature-card support-feature">
+              <div class="feature-card-top">
+                <div class="feature-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="3.4"></circle>
+                    <path d="M12 4.5V7"></path>
+                    <path d="M12 17V19.5"></path>
+                    <path d="M4.5 12H7"></path>
+                    <path d="M17 12H19.5"></path>
+                    <path d="M8.4 8.4L6.8 6.8"></path>
+                    <path d="M15.6 15.6L17.2 17.2"></path>
+                    <path d="M8.4 15.6L6.8 17.2"></path>
+                    <path d="M15.6 8.4L17.2 6.8"></path>
+                  </svg>
+                </div>
+                <span class="feature-tag support-tag">Score</span>
+              </div>
+
+              <h3>Extra Sentiment Scores</h3>
+              <p>
+                View VADER and TextBlob scores to support deeper sentiment interpretation.
+              </p>
+            </article>
+
+            <article class="feature-card support-feature">
+              <div class="feature-card-top">
+                <div class="feature-icon large-feature-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M7 4h10c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H7c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2Z"></path>
+                    <path d="M8 8h5"></path>
+                    <path d="M8 12h4"></path>
+                    <path d="M8 16h3"></path>
+                    <path d="M16 13a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"></path>
+                    <path d="M16 14.5V16l1 1"></path>
+                  </svg>
+                </div>
+                <span class="feature-tag support-tag">History</span>
+              </div>
+
+              <h3>Analysis History</h3>
+              <p>
+                Save previous analysis records automatically and return to past results anytime.
+              </p>
+            </article>
+
+            <article class="feature-card support-feature">
+              <div class="feature-card-top">
+                <div class="feature-icon large-feature-icon">
+                  <svg viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M6 3h8l4 4v14H6V3Z"></path>
+                    <path d="M14 3v5h4"></path>
+                    <path d="M9 11h6"></path>
+                    <path d="M9 14h3"></path>
+                    <path d="M14 15v4"></path>
+                    <path d="M12.5 17.5 14 19l1.5-1.5"></path>
+                  </svg>
+                </div>
+                <span class="feature-tag support-tag">Export</span>
+              </div>
+
+              <h3>CSV Export</h3>
+              <p>
+                Download one analysis record or export selected history records into one
+                combined CSV file.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- Models -->
+      <section id="models" class="section models-section">
+        <div class="section-container">
+          <div class="section-heading">
+            <span class="section-kicker">Models</span>
+            <h2>Machine Learning Models Used in CommentInsight</h2>
+            <p>
+              CommentInsight uses SVM as the primary sentiment classification model because it achieved
+              the strongest overall evaluation result. Logistic Regression and Naive Bayes are available
+              as optional comparison models.
+            </p>
+          </div>
+
+          <div class="model-comparison-grid">
+            <!-- SVM -->
+            <article class="model-performance-card svm-model-card">
+              <div class="model-card-header">
+                <div class="model-logo svm-logo">
+                  <span>SVM</span>
+                </div>
+
+                <div class="model-title-group">
+                  <span class="model-badge primary-badge">Primary Model</span>
+                  <h3>Support Vector Machine</h3>
+                </div>
+              </div>
+
+              <div class="model-divider"></div>
+
+              <div class="model-rank">
+                <div class="model-rank-icon">★</div>
+                <div>
+                  <strong>Best Overall Model</strong>
+                  <span>Used as the default model</span>
+                </div>
+              </div>
+
+              <div class="model-score-row">
+                <span>Overall Evaluation</span>
+                <strong>92%</strong>
+              </div>
+
+              <div class="model-progress">
+                <span class="model-progress-fill svm-progress"></span>
+              </div>
+
+              <p class="model-score-note">
+                Based on F1-score: <strong>0.9248</strong>
+              </p>
+
+              <p class="model-description">
+                Used as the default model for sentiment prediction because it achieved the strongest
+                overall evaluation result.
+              </p>
+            </article>
+
+            <!-- Logistic Regression -->
+            <article class="model-performance-card lr-model-card">
+              <div class="model-card-header">
+                <div class="model-logo lr-logo">
+                  <span>LR</span>
+                </div>
+
+                <div class="model-title-group">
+                  <span class="model-badge optional-badge lr-badge">Optional</span>
+                  <h3>Logistic Regression</h3>
+                </div>
+              </div>
+
+              <div class="model-divider"></div>
+
+              <div class="model-rank">
+                <div class="model-rank-icon lr-rank-icon">✓</div>
+                <div>
+                  <strong>Strong Comparison Model</strong>
+                  <span>Optional model comparison</span>
+                </div>
+              </div>
+
+              <div class="model-score-row">
+                <span>Overall Evaluation</span>
+                <strong>90%</strong>
+              </div>
+
+              <div class="model-progress">
+                <span class="model-progress-fill lr-progress"></span>
+              </div>
+
+              <p class="model-score-note lr-note">
+                Based on F1-score: <strong>0.9039</strong>
+              </p>
+
+              <p class="model-description">
+                Available as an optional model to compare prediction results with the primary SVM model.
+              </p>
+            </article>
+
+            <!-- Naive Bayes -->
+            <article class="model-performance-card nb-model-card">
+              <div class="model-card-header">
+                <div class="model-logo nb-logo">
+                  <span>NB</span>
+                </div>
+
+                <div class="model-title-group">
+                  <span class="model-badge optional-badge nb-badge">Optional</span>
+                  <h3>Naive Bayes</h3>
+                </div>
+              </div>
+
+              <div class="model-divider"></div>
+
+              <div class="model-rank">
+                <div class="model-rank-icon nb-rank-icon">▦</div>
+                <div>
+                  <strong>Basic Comparison Model</strong>
+                  <span>Additional comparison model</span>
+                </div>
+              </div>
+
+              <div class="model-score-row">
+                <span>Overall Evaluation</span>
+                <strong>70%</strong>
+              </div>
+
+              <div class="model-progress">
+                <span class="model-progress-fill nb-progress"></span>
+              </div>
+
+              <p class="model-score-note nb-note">
+                Based on F1-score: <strong>0.7017</strong>
+              </p>
+
+              <p class="model-description">
+                Available as an additional comparison model with lower overall performance.
+              </p>
+            </article>
+          </div>
+
+          <div class="model-explain-box">
+            <span class="model-info-icon">i</span>
+            <p>
+              Overall Evaluation is shown in a simple percentage format for easier understanding.
+              It is based on the model F1-score.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" class="section about-section">
+        <div class="section-container">
+          <div class="about-shell">
+            <div class="about-content">
+              <span class="section-kicker">About CommentInsight</span>
+              <h2>Built for Faster and More Consistent Sentiment Analysis</h2>
+
+              <p>
+                CommentInsight is a web-based sentiment analysis system designed to reduce the
+                time and effort required for manual sentiment analysis. Manual sentiment
+                analysis can be time-consuming, especially when dealing with large volumes of
+                social media comments.
+              </p>
+
+              <p>
+                In addition, human judgement may become less consistent over time due to
+                fatigue and subjective interpretation. To address these issues, CommentInsight
+                uses machine learning techniques to classify comments into positive, neutral,
+                and negative sentiment more efficiently.
+              </p>
+
+              <p>
+                The system uses SVM as the primary model and allows Logistic Regression and
+                Naive Bayes to be selected optionally for comparison. It also supports extra
+                sentiment scores, analysis history, and CSV export.
+              </p>
+
+              <div class="about-highlight-row">
+                <span>Tri-class sentiment</span>
+                <span>Optional model comparison</span>
+                <span>History and CSV export</span>
+              </div>
+            </div>
+
+            <div class="about-panel">
+              <div class="about-panel-header">
+                <span>System Value</span>
+                <strong>Problem → Solution</strong>
+              </div>
+
+              <div class="about-stat">
+                <div class="about-stat-icon">01</div>
+                <div>
+                  <span>Problem</span>
+                  <strong>Manual analysis is slow and less consistent over time</strong>
+                </div>
+              </div>
+
+              <div class="about-stat">
+                <div class="about-stat-icon">02</div>
+                <div>
+                  <span>Solution</span>
+                  <strong>Machine learning sentiment classification</strong>
+                </div>
+              </div>
+
+              <div class="about-stat">
+                <div class="about-stat-icon">03</div>
+                <div>
+                  <span>Output</span>
+                  <strong>Positive / Neutral / Negative</strong>
+                </div>
+              </div>
+
+              <div class="about-stat">
+                <div class="about-stat-icon">04</div>
+                <div>
+                  <span>Management</span>
+                  <strong>Saved history and CSV export</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <span>CommentInsight</span>
+        <p>© 2026 CommentInsight. Sentiment Analysis of Social Media Comments Using Machine Learning Techniques.</p>
+      </div>
+    </footer>
+  </div>
+
+  <script src="LandingPage.js"></script>
+</body>
+</html>

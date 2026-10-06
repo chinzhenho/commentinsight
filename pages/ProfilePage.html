@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Profile Settings - CommentInsight</title>
+  <link rel="icon" type="image/png" href="assets/commentinsight-icon.png" />
+  <link rel="stylesheet" href="SharedNavbar.css" />
+  <link rel="stylesheet" href="ProfilePage.css" />
+</head>
+<body>
+  <div class="profile-page">
+    <!-- Navbar -->
+    <nav class="navbar" aria-label="Primary">
+      <div class="navbar-inner">
+        <div class="brand">
+          <img
+            src="assets/commentinsight-logo.png"
+            alt="CommentInsight logo"
+            class="brand-icon-img"
+          />
+          <span class="brand-name">
+            Comment<span>Insight</span>
+          </span>
+        </div>
+
+        <div class="nav-links" id="navLinks">
+          <button type="button" class="nav-button" data-path="/analyze">Analyze</button>
+          <button type="button" class="nav-button" data-path="/history">History</button>
+          <button type="button" class="nav-button active" data-path="/profile" aria-current="page">Profile</button>
+          <button type="button" class="nav-button nav-button-logout" id="logoutBtn">
+            <span class="logout-icon">↩</span>
+            Logout
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <header class="page-header">
+        <h1>Profile Settings</h1>
+        <p>Manage your account information and update your password securely.</p>
+      </header>
+
+      <div class="profile-main">
+        <!-- User Information -->
+        <section class="card user-card">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="icon">👤</span>
+              <div>
+                <h2>User Information</h2>
+                <p>Update your personal details</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body">
+            <div class="form-group inline-group">
+              <label for="name">Full Name</label>
+              <div class="input-row">
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  placeholder="Loading full name..."
+                  disabled
+                />
+                <button id="saveNameBtn" class="btn btn-primary" type="button" disabled>
+                  <span id="saveNameSpinner" class="spinner hidden"></span>
+                  Save
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="Loading email address..."
+                disabled
+              />
+              <p class="help-text">Email address cannot be changed.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Update Password -->
+        <section class="card password-card">
+          <div class="card-header">
+            <div class="card-title">
+              <span class="icon">🔒</span>
+              <div>
+                <h2>Update Password</h2>
+                <p>Use a stronger password to keep your account secure</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-body password-card-body">
+            <div class="form-group">
+              <label for="currentPassword">Current Password</label>
+              <div class="password-input-wrapper">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="6" y="11" width="12" height="9" rx="2"></rect>
+                    <path d="M8.5 11V8.5a3.5 3.5 0 1 1 7 0V11"></path>
+                  </svg>
+                </span>
+
+                <input
+                  id="currentPassword"
+                  name="currentPassword"
+                  type="password"
+                  placeholder="Enter current password"
+                  autocomplete="current-password"
+                />
+
+                <button type="button" class="password-toggle" data-target="currentPassword" aria-label="Show current password">
+                  <svg class="password-icon-hidden" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                    <circle cx="12" cy="12" r="2.5"></circle>
+                    <path d="M4 4l16 16"></path>
+                  </svg>
+
+                  <svg class="password-icon-visible hidden" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                    <circle cx="12" cy="12" r="2.5"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="newPassword">New Password</label>
+              <div class="password-input-wrapper">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="6" y="11" width="12" height="9" rx="2"></rect>
+                    <path d="M8.5 11V8.5a3.5 3.5 0 1 1 7 0V11"></path>
+                  </svg>
+                </span>
+
+                <input
+                  id="newPassword"
+                  name="newProfilePassword"
+                  type="password"
+                  placeholder="Enter new password"
+                  autocomplete="off"
+                  readonly
+                />
+
+                <button type="button" class="password-toggle" data-target="newPassword" aria-label="Show new password">
+                  <svg class="password-icon-hidden" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                    <circle cx="12" cy="12" r="2.5"></circle>
+                    <path d="M4 4l16 16"></path>
+                  </svg>
+
+                  <svg class="password-icon-visible hidden" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                    <circle cx="12" cy="12" r="2.5"></circle>
+                  </svg>
+                </button>
+              </div>
+
+              <ul class="password-rules" id="profilePasswordRules" aria-label="Password requirements">
+                <li id="profile-rule-length"><span class="rule-icon"></span>At least 8 characters</li>
+                <li id="profile-rule-uppercase"><span class="rule-icon"></span>At least 1 uppercase letter</li>
+                <li id="profile-rule-lowercase"><span class="rule-icon"></span>At least 1 lowercase letter</li>
+                <li id="profile-rule-number"><span class="rule-icon"></span>At least 1 number</li>
+                <li id="profile-rule-special"><span class="rule-icon"></span>At least 1 special character</li>
+              </ul>
+            </div>
+
+            <div class="form-group">
+              <label for="confirmPassword">Confirm New Password</label>
+              <div class="password-input-wrapper">
+                <span class="input-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <rect x="6" y="11" width="12" height="9" rx="2"></rect>
+                    <path d="M8.5 11V8.5a3.5 3.5 0 1 1 7 0V11"></path>
+                    <path d="M10 15l1.5 1.5L14.5 13.5"></path>
+                  </svg>
+                </span>
+
+                <input
+                  id="confirmPassword"
+                  name="confirmProfilePassword"
+                  type="password"
+                  placeholder="Re-enter new password"
+                  autocomplete="off"
+                  readonly
+                />
+
+                <button type="button" class="password-toggle" data-target="confirmPassword" aria-label="Show confirm password">
+                  <svg class="password-icon-hidden" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                    <circle cx="12" cy="12" r="2.5"></circle>
+                    <path d="M4 4l16 16"></path>
+                  </svg>
+
+                  <svg class="password-icon-visible hidden" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                    <circle cx="12" cy="12" r="2.5"></circle>
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <button id="updatePasswordBtn" class="btn btn-primary btn-full" type="button">
+              <span id="passwordSpinner" class="spinner hidden"></span>
+              Update Password
+            </button>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics-compat.js"></script>
+  <script src="FirebaseKeys.js"></script>
+  <script src="FirebaseConfig.js"></script>
+  <script src="SharedNavbar.js"></script>
+  <script src="ProfilePage.js"></script>
+</body>
+</html>

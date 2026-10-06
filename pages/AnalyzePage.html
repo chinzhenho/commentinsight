@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analyze - CommentInsight</title>
+  <link rel="icon" type="image/png" href="assets/commentinsight-icon.png" />
+  <link rel="stylesheet" href="SharedNavbar.css" />
+  <link rel="stylesheet" href="AnalyzePage.css" />
+</head>
+<body>
+  <div id="app" class="min-h-screen bg-slate-50">
+    <nav class="navbar" aria-label="Primary">
+      <div class="navbar-inner">
+        <div class="brand">
+          <img src="assets/commentinsight-logo.png" alt="CommentInsight logo" class="brand-icon-img" />
+          <span class="brand-name">Comment<span>Insight</span></span>
+        </div>
+
+        <div class="nav-links" id="navLinks">
+          <button type="button" class="nav-button active" data-path="/analyze" aria-current="page">Analyze</button>
+          <button type="button" class="nav-button" data-path="/history">History</button>
+          <button type="button" class="nav-button" data-path="/profile">Profile</button>
+          <button type="button" class="nav-button nav-button-logout" id="logoutBtn">
+            <span class="logout-icon">↩</span>
+            Logout
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <div class="header">
+        <h1>Analyze Comments</h1>
+        <p>Enter up to 5 comments, analyze them using the primary SVM model, and optionally compare results with LR and NB.</p>
+      </div>
+
+      <div class="grid-layout">
+        <div class="left-panel">
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Enter Comments</h2>
+              <p class="card-description">Add up to 5 comments (max 500 characters each)</p>
+            </div>
+            <div class="card-content">
+              <div id="commentsContainer" class="comments-container"></div>
+              <div id="errorMessage" class="error-message hidden" role="alert"></div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card-header">
+              <h2 class="card-title">Model Selection</h2>
+              <p class="card-description">SVM is used as the primary model. LR and NB can be selected for comparison.</p>
+            </div>
+            <div class="card-content">
+              <div class="model-section">
+                <label class="section-label">Primary Model</label>
+                <div id="defaultModelGroup" class="radio-group"></div>
+              </div>
+
+              <div class="model-section">
+                <label class="section-label">Compare with Additional Models</label>
+                <div id="compareModelsGroup" class="checkbox-group"></div>
+              </div>
+
+              <p class="info-box">
+                <span>📝</span>
+                All selected models use the same preprocessing and TF-IDF pipeline for fair comparison.
+              </p>
+            </div>
+          </div>
+
+          <div class="button-group">
+            <button id="analyzeBtn" type="button" class="btn btn-primary btn-lg">✨ Analyze Comments</button>
+            <button id="resetBtn" type="button" class="btn btn-outline btn-lg">↺ Reset Form</button>
+          </div>
+        </div>
+
+        <div class="right-panel">
+          <div id="resultsContainer"></div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <div id="detailsModal" class="details-modal hidden" role="dialog" aria-modal="true" aria-labelledby="detailsModalTitle">
+    <div id="detailsModalBackdrop" class="details-modal-backdrop"></div>
+    <div class="details-modal-card">
+      <div class="details-modal-header">
+        <div>
+          <h2 id="detailsModalTitle">Comment Details</h2>
+        </div>
+        <button id="closeDetailsModal" type="button" class="modal-close-btn" aria-label="Close details modal">X</button>
+      </div>
+
+      <div class="details-modal-body">
+        <section class="modal-comment-summary">
+          <div class="modal-comment-icon">
+            <span class="comment-input-icon" aria-hidden="true">
+              <span class="comment-input-line"></span>
+              <span class="comment-input-line"></span>
+              <span class="comment-input-line short"></span>
+            </span>
+          </div>
+
+          <div class="modal-comment-main">
+            <p class="modal-summary-label">Comment</p>
+            <p id="modalCommentText" class="modal-comment-text"></p>
+          </div>
+
+          <div class="modal-predicted-box">
+            <p class="modal-summary-label">Predicted Sentiment</p>
+            <div id="modalSentimentBadge"></div>
+          </div>
+        </section>
+
+        <section class="modal-section">
+          <div class="modal-section-header">
+            <h3>VADER Sentiment Scores</h3>
+            <p>Shows VADER positive, neutral, negative, and compound scores for this comment.</p>
+          </div>
+          <div class="vader-layout">
+            <div class="vader-chart-wrap">
+              <canvas id="vaderDoughnutChart" aria-label="VADER sentiment doughnut chart" role="img"></canvas>
+            </div>
+            <div class="score-list">
+              <div class="score-row"><span><i class="score-dot positive"></i>Positive</span><strong id="vaderPositive">0.00</strong></div>
+              <div class="score-row"><span><i class="score-dot neutral"></i>Neutral</span><strong id="vaderNeutral">0.00</strong></div>
+              <div class="score-row"><span><i class="score-dot negative"></i>Negative</span><strong id="vaderNegative">0.00</strong></div>
+
+              <div class="compound-score-card">
+                <div class="compound-score-header">
+                  <span>Compound</span>
+                  <strong id="vaderCompound">0.000</strong>
+                </div>
+
+                <div class="compound-range">
+                  <span class="compound-end compound-negative">-1</span>
+                  <div class="compound-track">
+                    <span id="compoundPointer" class="compound-pointer"></span>
+                  </div>
+                  <span class="compound-end compound-positive">+1</span>
+                </div>
+
+                <div class="compound-labels">
+                  <span>Most negative</span>
+                  <span>Neutral</span>
+                  <span>Most positive</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="modal-section">
+          <div class="modal-section-header">
+            <h3>TextBlob Analysis</h3>
+            <p>Polarity shows sentiment direction, while subjectivity shows how opinion-based the comment is.</p>
+          </div>
+
+          <div class="textblob-grid">
+            <div class="metric-card textblob-metric-card">
+              <h4 class="metric-title">Polarity</h4>
+
+              <div class="metric-scale-labels">
+                <span>Negative</span>
+                <span>Positive</span>
+              </div>
+
+              <div class="range-track polarity-track">
+                <span id="polarityPointer" class="range-pointer"></span>
+              </div>
+
+              <div class="metric-scale-values">
+                <span>-1</span>
+                <span>+1</span>
+              </div>
+
+              <p id="polarityValue" class="metric-value">0.000</p>
+              <p class="metric-range-note">-1 = most negative, 0 = neutral, +1 = most positive</p>
+            </div>
+
+            <div class="metric-card textblob-metric-card">
+              <h4 class="metric-title">Subjectivity</h4>
+
+              <div class="metric-scale-labels">
+                <span>Objective</span>
+                <span>Subjective</span>
+              </div>
+
+              <div class="range-track subjectivity-track">
+                <span id="subjectivityPointer" class="range-pointer"></span>
+              </div>
+
+              <div class="metric-scale-values">
+                <span>0</span>
+                <span>1</span>
+              </div>
+
+              <p id="subjectivityValue" class="metric-value">0.000</p>
+              <p class="metric-range-note">0 = objective/factual, 1 = subjective/opinion-based</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <template id="commentInputTemplate">
+    <div class="comment-item">
+      <div class="comment-header">
+        <label></label>
+        <span class="comment-char-count">0 / 500</span>
+      </div>
+      <textarea class="comment-textarea" maxlength="500"></textarea>
+      <p class="comment-limit-message hidden">500-character limit reached. Extra text will not be added.</p>
+    </div>
+  </template>
+
+  <template id="primaryModelTemplate">
+    <div class="model-option-card default-model-row selected">
+      <div class="model-option-left">
+        <input type="radio" id="SVM" name="defaultModel" value="SVM" checked>
+        <span class="model-pill model-pill-svm">SVM</span>
+        <div class="model-option-text">
+          <div class="model-name-row">
+            <span class="model-full-name">Support Vector Machine</span>
+            <span class="recommended-pill inline-recommended">Recommended</span>
+          </div>
+          <span class="model-description">Best overall performance. Recommended as the primary model.</span>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="compareModelTemplate">
+    <div class="compare-model-row">
+      <label class="model-option-card compare-model-label">
+        <div class="model-option-left">
+          <input type="checkbox">
+          <span class="model-pill"></span>
+          <div class="model-option-text">
+            <span class="model-full-name"></span>
+            <span class="model-description"></span>
+          </div>
+        </div>
+      </label>
+    </div>
+  </template>
+
+  <template id="emptyStateTemplate">
+    <div class="card card-empty">
+      <div class="empty-guide-state">
+        <div class="empty-guide-steps">
+          <div class="empty-guide-step">
+            <div class="empty-guide-icon comment-step-icon">
+              <span class="comment-input-icon" aria-hidden="true">
+                <span class="comment-input-line"></span>
+                <span class="comment-input-line"></span>
+                <span class="comment-input-line short"></span>
+              </span>
+            </div>
+            <span class="empty-guide-number">1</span>
+            <h4>Enter comments</h4>
+            <p>Add up to 5 comments, with a maximum of 500 characters each.</p>
+          </div>
+
+          <div class="empty-guide-line"></div>
+
+          <div class="empty-guide-step">
+            <div class="empty-guide-icon model-step-icon">
+              <span class="mini-model-select-icon" aria-hidden="true">
+                <span class="mini-model-pill mini-svm">SVM</span>
+                <span class="mini-model-pill mini-lr">LR</span>
+                <span class="mini-model-pill mini-nb">NB</span>
+              </span>
+            </div>
+            <span class="empty-guide-number">2</span>
+            <h4>Select models</h4>
+            <p>Use SVM as the primary model and optionally compare results with LR and NB.</p>
+          </div>
+
+          <div class="empty-guide-line"></div>
+
+          <div class="empty-guide-step">
+            <div class="empty-guide-icon result-step-icon">
+              <span class="mini-bar-chart-icon" aria-hidden="true">
+                <span class="mini-bar positive-bar"></span>
+                <span class="mini-bar neutral-bar"></span>
+                <span class="mini-bar negative-bar"></span>
+              </span>
+            </div>
+            <span class="empty-guide-number">3</span>
+            <h4>View results</h4>
+            <p>See sentiment results and extra scores.</p>
+          </div>
+        </div>
+
+        <div class="empty-guide-bottom">
+          <h3>No results yet</h3>
+          <p>Complete the steps above to generate your sentiment analysis results.</p>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="loadingStateTemplate">
+    <div class="card">
+      <div class="card-content">
+        <div class="loading-card">
+          <div class="spinner"></div>
+          <p class="loading-text">Analyzing and saving comments...</p>
+          <p class="loading-subtext">Processing results and saving your analysis history</p>
+          <div class="progress-bar">
+            <div class="progress-bar-fill"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="summaryCardTemplate">
+    <div class="card analysis-summary-card summary-with-charts">
+      <div class="analysis-summary-top">
+        <div class="analysis-summary-heading">
+          <div class="analysis-summary-icon">
+            <span class="summary-icon-bars" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </div>
+          <h2 class="card-title">Analysis Summary</h2>
+        </div>
+
+        <div class="analysis-summary-metrics">
+          <div class="analysis-summary-block">
+            <p class="summary-label">Total Comments Analyzed</p>
+            <p class="summary-number"></p>
+          </div>
+          <div class="analysis-summary-divider"></div>
+          <div class="analysis-summary-block">
+            <p class="summary-label">Models Selected</p>
+            <div class="selected-model-pills"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="summary-chart-grid"></div>
+    </div>
+  </template>
+
+  <template id="modelPillTemplate">
+    <span class="model-pill"></span>
+  </template>
+
+  <template id="summaryChartCardTemplate">
+    <div class="summary-chart-card">
+      <div class="summary-chart-header">
+        <div class="summary-model-title-block">
+          <h3></h3>
+          <p></p>
+        </div>
+
+        <div class="summary-mini-counts compact-counts">
+          <span class="summary-count-item" title="Positive">
+            <i class="summary-count-dot positive-dot"></i>
+            <span class="summary-count-value"></span>
+          </span>
+          <span class="summary-count-item" title="Neutral">
+            <i class="summary-count-dot neutral-dot"></i>
+            <span class="summary-count-value"></span>
+          </span>
+          <span class="summary-count-item" title="Negative">
+            <i class="summary-count-dot negative-dot"></i>
+            <span class="summary-count-value"></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="summary-chart-canvas-wrap">
+        <canvas role="img"></canvas>
+        <p class="chart-fallback hidden"></p>
+      </div>
+    </div>
+  </template>
+
+  <template id="modelResultCardTemplate">
+    <div class="card model-result-card">
+      <div class="model-result-header">
+        <div class="model-result-title-wrap">
+          <span class="model-dot"></span>
+          <h3 class="model-result-title"></h3>
+        </div>
+
+        <div class="model-summary-inline">
+          <span class="summary-positive"></span>
+          <span class="summary-divider-small"></span>
+          <span class="summary-neutral"></span>
+          <span class="summary-divider-small"></span>
+          <span class="summary-negative"></span>
+        </div>
+      </div>
+
+      <div class="model-result-content comment-results-only">
+        <div class="per-comment-table full-width-table">
+          <div class="per-comment-header">
+            <span>Comment</span>
+            <span>Sentiment</span>
+            <span>Extra Scores</span>
+          </div>
+          <div class="per-comment-list"></div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="resultRowTemplate">
+    <article class="result-row">
+      <div class="result-row-index"></div>
+      <div class="result-row-comment">
+        <p class="comment-preview"></p>
+      </div>
+      <div class="result-row-sentiment"></div>
+      <div class="result-row-action">
+        <button type="button" class="btn supporting-btn">View Extra Scores</button>
+      </div>
+    </article>
+  </template>
+
+  <template id="sentimentBadgeTemplate">
+    <span class="sentiment-badge">
+      <span class="sentiment-badge-icon" aria-hidden="true"></span>
+      <span class="sentiment-badge-label"></span>
+    </span>
+  </template>
+
+  <template id="toastTemplate">
+    <div class="toast" role="status"></div>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics-compat.js"></script>
+  <script src="FirebaseKeys.js"></script>
+  <script src="FirebaseConfig.js"></script>
+  <script src="SharedNavbar.js"></script>
+  <script src="AnalyzePage.js"></script>
+</body>
+</html>

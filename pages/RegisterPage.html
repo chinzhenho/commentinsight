@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - CommentInsight</title>
+  <link rel="icon" type="image/png" href="assets/commentinsight-icon.png" />
+  <link rel="stylesheet" href="RegisterPage.css" />
+</head>
+<body>
+  <div class="register-page">
+    <div class="register-card">
+      <a href="LandingPage.html" class="back-home-link" aria-label="Back to landing page">
+        <span>←</span>
+        Back to Home
+      </a>
+
+      <div class="register-header">
+        <h1>Create Account</h1>
+        <p>
+          Register to analyze social media comments with faster and more
+          consistent sentiment classification.
+        </p>
+      </div>
+
+      <form id="registerForm" class="register-form" novalidate autocomplete="off">
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 12a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"></path>
+                <path d="M4 20a8 8 0 0 1 16 0"></path>
+              </svg>
+            </span>
+            <input id="name" name="name" type="text" placeholder="Enter your full name" autocomplete="off" />
+          </div>
+          <p id="nameError" class="field-error hidden" role="alert"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 6.75h16v10.5H4z"></path>
+                <path d="m5 8 7 5 7-5"></path>
+              </svg>
+            </span>
+            <input id="email" name="email" type="email" placeholder="Enter your email address" autocomplete="off" />
+          </div>
+          <p id="emailError" class="field-error hidden" role="alert"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="6" y="11" width="12" height="9" rx="2"></rect>
+                <path d="M8.5 11V8.5a3.5 3.5 0 1 1 7 0V11"></path>
+              </svg>
+            </span>
+
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Create a password"
+              autocomplete="off"
+            />
+
+            <button type="button" class="password-toggle" data-target="password" aria-label="Show password">
+              <svg class="password-icon-hidden" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                <circle cx="12" cy="12" r="2.5"></circle>
+                <path d="M4 4l16 16"></path>
+              </svg>
+
+              <svg class="password-icon-visible hidden" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                <circle cx="12" cy="12" r="2.5"></circle>
+              </svg>
+            </button>
+          </div>
+
+          <ul class="password-rules" id="passwordRules">
+            <li id="rule-length"><span class="rule-icon"></span> At least 8 characters</li>
+            <li id="rule-uppercase"><span class="rule-icon"></span> At least 1 uppercase letter</li>
+            <li id="rule-lowercase"><span class="rule-icon"></span> At least 1 lowercase letter</li>
+            <li id="rule-number"><span class="rule-icon"></span> At least 1 number</li>
+            <li id="rule-special"><span class="rule-icon"></span> At least 1 special character</li>
+          </ul>
+
+          <p id="passwordError" class="field-error hidden" role="alert"></p>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirm Password</label>
+          <div class="input-wrapper">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="6" y="11" width="12" height="9" rx="2"></rect>
+                <path d="M8.5 11V8.5a3.5 3.5 0 1 1 7 0V11"></path>
+                <path d="M10 15l1.5 1.5L14.5 13.5"></path>
+              </svg>
+            </span>
+
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              placeholder="Re-enter your password"
+              autocomplete="off"
+            />
+
+            <button type="button" class="password-toggle" data-target="confirmPassword" aria-label="Show confirm password">
+              <svg class="password-icon-hidden" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                <circle cx="12" cy="12" r="2.5"></circle>
+                <path d="M4 4l16 16"></path>
+              </svg>
+
+              <svg class="password-icon-visible hidden" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"></path>
+                <circle cx="12" cy="12" r="2.5"></circle>
+              </svg>
+            </button>
+          </div>
+          <p id="confirmPasswordError" class="field-error hidden" role="alert"></p>
+        </div>
+
+        <button id="registerButton" class="btn btn-primary btn-full" type="submit">
+          <span id="registerSpinner" class="spinner hidden"></span>
+          <span id="buttonText">Create Account</span>
+        </button>
+
+        <p class="form-footer">
+          Already have an account?
+          <a href="LoginPage.html" class="link">Login</a>
+        </p>
+      </form>
+    </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+  </div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics-compat.js"></script>
+  <script src="FirebaseKeys.js"></script>
+  <script src="FirebaseConfig.js"></script>
+  <script src="RegisterPage.js"></script>
+</body>
+</html>

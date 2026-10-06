@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analysis History - CommentInsight</title>
+  <link rel="icon" type="image/png" href="assets/commentinsight-icon.png" />
+  <link rel="stylesheet" href="SharedNavbar.css" />
+  <link rel="stylesheet" href="HistoryPage.css">
+</head>
+<body>
+  <div id="app" class="min-h-screen bg-slate-50">
+    <!-- Navbar -->
+    <nav class="navbar" aria-label="Primary">
+      <div class="navbar-inner">
+        <div class="brand">
+          <img
+            src="assets/commentinsight-logo.png"
+            alt="CommentInsight logo"
+            class="brand-icon-img"
+          />
+          <span class="brand-name">
+            Comment<span>Insight</span>
+          </span>
+        </div>
+
+        <div class="nav-links" id="navLinks">
+          <button type="button" class="nav-button" data-path="/analyze">Analyze</button>
+          <button type="button" class="nav-button active" data-path="/history" aria-current="page">History</button>
+          <button type="button" class="nav-button" data-path="/profile">Profile</button>
+          <button type="button" class="nav-button nav-button-logout" id="logoutBtn">
+            <span class="logout-icon">↩</span>
+            Logout
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="history-page-container">
+      <!-- Header Section -->
+      <section class="history-page-header">
+        <h1 class="history-page-title">Analysis History</h1>
+        <p class="history-page-subtitle">
+          Review saved sentiment analysis results, download results as CSV files, or delete records you no longer need.
+        </p>
+      </section>
+
+      <!-- History Records Container -->
+      <section id="historyContainer" class="history-records-container"></section>
+    </main>
+  </div>
+
+  <!-- Full Analysis Results Modal -->
+  <div id="historyDetailsModal" class="details-modal hidden" role="dialog" aria-modal="true" aria-labelledby="historyDetailsTitle">
+    <div id="historyDetailsBackdrop" class="details-modal-backdrop"></div>
+
+    <div class="details-modal-card">
+      <div class="details-modal-header">
+        <div>
+          <h2 id="historyDetailsTitle">Analysis Details</h2>
+          <p id="historyDetailsMeta" class="history-details-meta"></p>
+        </div>
+
+        <button id="closeHistoryDetailsModal" type="button" class="modal-close-btn" aria-label="Close history details">
+          X
+        </button>
+      </div>
+
+      <div id="historyDetailsContent" class="details-modal-body"></div>
+    </div>
+  </div>
+
+  <!-- Comment Extra Scores Modal -->
+  <div id="commentDetailsModal" class="details-modal hidden" role="dialog" aria-modal="true" aria-labelledby="commentDetailsTitle">
+    <div id="commentDetailsBackdrop" class="details-modal-backdrop"></div>
+
+    <div class="details-modal-card">
+      <div class="details-modal-header">
+        <div>
+          <h2 id="commentDetailsTitle">Extra Scores</h2>
+        </div>
+
+        <button id="closeCommentDetailsModal" type="button" class="modal-close-btn" aria-label="Close extra scores modal">
+          X
+        </button>
+      </div>
+
+      <div class="details-modal-body">
+        <section class="modal-comment-summary">
+          <div class="modal-comment-icon">
+            <span class="comment-input-icon" aria-hidden="true">
+              <span class="comment-input-line"></span>
+              <span class="comment-input-line short"></span>
+              <span class="comment-input-line"></span>
+            </span>
+          </div>
+
+          <div class="modal-comment-main">
+            <p class="modal-summary-label">Comment</p>
+            <p id="modalCommentText" class="modal-comment-text"></p>
+          </div>
+
+          <div class="modal-predicted-box">
+            <p class="modal-summary-label">Predicted Sentiment</p>
+            <div id="modalSentimentBadge"></div>
+          </div>
+        </section>
+
+        <section class="modal-section">
+          <div class="modal-section-header">
+            <h3>VADER Sentiment Scores</h3>
+            <p>Shows positive, neutral, negative, and compound scores for this comment.</p>
+          </div>
+
+          <div class="vader-layout">
+            <div class="vader-chart-wrap">
+              <canvas id="vaderDoughnutChart" aria-label="VADER sentiment doughnut chart" role="img"></canvas>
+            </div>
+
+            <div class="score-list">
+              <div class="score-row">
+                <span><i class="score-dot positive"></i>Positive</span>
+                <strong id="vaderPositive">0.000</strong>
+              </div>
+
+              <div class="score-row">
+                <span><i class="score-dot neutral"></i>Neutral</span>
+                <strong id="vaderNeutral">0.000</strong>
+              </div>
+
+              <div class="score-row">
+                <span><i class="score-dot negative"></i>Negative</span>
+                <strong id="vaderNegative">0.000</strong>
+              </div>
+
+              <div class="compound-score-card">
+                <div class="compound-score-header">
+                  <span>Compound</span>
+                  <strong id="vaderCompound">0.000</strong>
+                </div>
+
+                <div class="compound-range">
+                  <span class="compound-end compound-negative">-1</span>
+
+                  <div class="compound-track">
+                    <span id="compoundPointer" class="compound-pointer"></span>
+                  </div>
+
+                  <span class="compound-end compound-positive">+1</span>
+                </div>
+
+                <div class="compound-labels">
+                  <span>Most negative</span>
+                  <span>Neutral</span>
+                  <span>Most positive</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="modal-section">
+          <div class="modal-section-header">
+            <h3>TextBlob Analysis</h3>
+            <p>Polarity shows sentiment direction, while subjectivity shows how opinion-based the comment is.</p>
+          </div>
+
+          <div class="textblob-grid">
+            <div class="metric-card textblob-metric-card">
+              <h4 class="metric-title">Polarity</h4>
+
+              <div class="metric-scale-labels">
+                <span>Negative</span>
+                <span>Positive</span>
+              </div>
+
+              <div class="range-track polarity-track">
+                <span id="polarityPointer" class="range-pointer"></span>
+              </div>
+
+              <div class="metric-scale-values">
+                <span>-1</span>
+                <span>+1</span>
+              </div>
+
+              <p id="polarityValue" class="metric-value">0.000</p>
+
+              <p class="metric-range-note">
+                -1 = most negative, 0 = neutral, +1 = most positive
+              </p>
+            </div>
+
+            <div class="metric-card textblob-metric-card">
+              <h4 class="metric-title">Subjectivity</h4>
+
+              <div class="metric-scale-labels">
+                <span>Objective</span>
+                <span>Subjective</span>
+              </div>
+
+              <div class="range-track subjectivity-track">
+                <span id="subjectivityPointer" class="range-pointer"></span>
+              </div>
+
+              <div class="metric-scale-values">
+                <span>0</span>
+                <span>1</span>
+              </div>
+
+              <p id="subjectivityValue" class="metric-value">0.000</p>
+
+              <p class="metric-range-note">
+                0 = objective/factual, 1 = subjective/opinion-based
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteModal" class="delete-modal hidden" role="dialog" aria-modal="true" aria-labelledby="deleteModalTitle">
+    <div class="delete-modal-backdrop"></div>
+
+    <div class="delete-modal-card">
+      <div class="delete-modal-header">
+        <h2 id="deleteModalTitle">Delete Analysis</h2>
+        <button id="closeDeleteModal" type="button" class="modal-close-btn" aria-label="Close delete modal">
+          X
+        </button>
+      </div>
+
+      <div class="delete-modal-body">
+        <p id="deleteMessage">
+          Are you sure you want to delete this analysis record?
+          This action cannot be undone and the record will be permanently removed from Firebase.
+        </p>
+      </div>
+
+      <div class="delete-modal-actions">
+        <button id="cancelBtn" type="button" class="btn btn-outline">Cancel</button>
+        <button id="confirmDeleteBtn" type="button" class="btn delete-confirm-btn">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Templates used by HistoryPage.js -->
+  <template id="historyLoadingTemplate">
+    <div class="history-loading-card">
+      <div class="history-spinner"></div>
+      <h3>Loading analysis history...</h3>
+      <p>Please wait while your saved analysis records are being loaded.</p>
+    </div>
+  </template>
+
+  <template id="historyErrorTemplate">
+    <div class="history-error-card">
+      <h3>Unable to load history</h3>
+      <p class="history-error-message"></p>
+      <button type="button" class="btn btn-primary retry-load-history-btn">
+        Try Again
+      </button>
+    </div>
+  </template>
+
+  <template id="historyEmptyTemplate">
+    <div class="empty-state">
+      <div class="empty-icon">History</div>
+      <h3 class="empty-title">No history yet</h3>
+      <p class="empty-description">Your analysis results will appear here after you run your first analysis</p>
+      <button type="button" class="empty-action">Start Analyzing</button>
+    </div>
+  </template>
+
+  <template id="bulkToolbarTemplate">
+    <div class="bulk-toolbar">
+      <div class="bulk-left">
+        <label class="bulk-select-wrap">
+          <input type="checkbox" id="selectAllHistoryRecords">
+          <span>Select all</span>
+        </label>
+        <span class="bulk-divider"></span>
+        <span class="selected-count"></span>
+      </div>
+
+      <div class="bulk-right">
+        <button type="button" class="download-selected-btn" id="downloadSelectedCsvBtn">
+          Download Selected CSV
+        </button>
+
+        <button type="button" class="delete-selected-btn" id="deleteSelectedBtn">
+          Delete Selected
+        </button>
+
+        <button type="button" class="clear-selection-btn" id="clearSelectedHistoryBtn">
+          Clear Selection
+        </button>
+      </div>
+    </div>
+  </template>
+
+  <template id="historyFooterTemplate">
+    <div class="history-footer">
+      <span class="history-footer-icon">ⓘ</span>
+      <span class="history-footer-text"></span>
+    </div>
+  </template>
+
+  <template id="historyTableTemplate">
+    <div class="history-table-card">
+      <div class="history-table">
+        <div class="history-table-header">
+          <div class="history-col checkbox-col">
+            <input type="checkbox" id="selectAllTableCheckbox">
+          </div>
+          <div class="history-col analysis-col">Analysis</div>
+          <div class="history-col datetime-col">Date & Time</div>
+          <div class="history-col models-col">Models</div>
+          <div class="history-col comments-col">Total Comments</div>
+          <div class="history-col summary-col">Summary</div>
+          <div class="history-col actions-col">Actions</div>
+        </div>
+
+        <div id="historyTableBody" class="history-table-body"></div>
+      </div>
+    </div>
+  </template>
+
+  <template id="historyTableRowTemplate">
+    <div class="history-table-row">
+      <div class="history-col checkbox-col">
+        <input type="checkbox" class="record-select-checkbox">
+      </div>
+
+      <div class="history-col analysis-col">
+        <div class="analysis-title"></div>
+      </div>
+
+      <div class="history-col datetime-col">
+        <div class="history-date"></div>
+        <div class="history-time"></div>
+      </div>
+
+      <div class="history-col models-col">
+        <div class="model-tags"></div>
+      </div>
+
+      <div class="history-col comments-col">
+        <strong></strong>
+      </div>
+
+      <div class="history-col summary-col">
+        <div class="history-summary-counts">
+          <span><i class="summary-dot positive-dot"></i><span class="summary-positive-count"></span></span>
+          <span><i class="summary-dot neutral-dot"></i><span class="summary-neutral-count"></span></span>
+          <span><i class="summary-dot negative-dot"></i><span class="summary-negative-count"></span></span>
+        </div>
+      </div>
+
+      <div class="history-col actions-col">
+        <button type="button" class="history-action-btn view-btn">View Details</button>
+
+        <div class="action-secondary-row">
+          <button type="button" class="history-action-btn download-btn">Download CSV</button>
+          <button type="button" class="history-action-btn delete-btn">Delete</button>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="modelPillTemplate">
+    <span class="model-pill"></span>
+  </template>
+
+  <template id="historyDetailsSummaryTemplate">
+    <div class="history-details-summary-card summary-two-columns">
+      <div class="history-details-summary-item">
+        <span class="history-details-summary-label">Total Comments</span>
+        <strong class="history-details-total-comments"></strong>
+      </div>
+
+      <div class="history-details-summary-item">
+        <span class="history-details-summary-label">Models</span>
+        <div class="model-tags"></div>
+      </div>
+    </div>
+  </template>
+
+  <template id="historyModelDetailsListTemplate">
+    <div id="historyModelDetailsList" class="history-model-details-list"></div>
+  </template>
+
+  <template id="historyModelDetailCardTemplate">
+    <div class="history-model-detail-card">
+      <div class="history-model-detail-header">
+        <div class="history-model-title-wrap">
+          <h3></h3>
+          <span class="history-model-type-pill"></span>
+        </div>
+
+        <div class="model-summary-inline">
+          <span class="summary-positive"></span>
+          <span class="summary-divider-small"></span>
+          <span class="summary-neutral"></span>
+          <span class="summary-divider-small"></span>
+          <span class="summary-negative"></span>
+        </div>
+      </div>
+
+      <div class="history-model-detail-content">
+        <div class="history-chart-area">
+          <canvas></canvas>
+        </div>
+
+        <div class="history-comment-table">
+          <div class="history-comment-table-header">
+            <span>#</span>
+            <span>Comment</span>
+            <span>Sentiment</span>
+            <span>Extra Scores</span>
+          </div>
+
+          <div class="history-comment-table-body"></div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <template id="historyCommentRowTemplate">
+    <div class="history-comment-row">
+      <span class="history-comment-index"></span>
+      <span class="history-comment-text"></span>
+      <span class="history-comment-sentiment"></span>
+      <button type="button" class="history-extra-score-btn">View Extra Scores</button>
+    </div>
+  </template>
+
+  <template id="sentimentBadgeTemplate">
+    <span class="sentiment-badge">
+      <span class="sentiment-badge-icon" aria-hidden="true"></span>
+      <span class="sentiment-badge-label"></span>
+    </span>
+  </template>
+
+  <template id="toastTemplate">
+    <div class="toast" role="status"></div>
+  </template>
+
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics-compat.js"></script>
+  <script src="FirebaseKeys.js"></script>
+  <script src="FirebaseConfig.js"></script>
+  <script src="SharedNavbar.js"></script>
+  <script src="HistoryPage.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+/* =========================
+   Shared Navbar - CommentInsight
+   Used by AnalyzePage, HistoryPage, ProfilePage
+========================= */
+
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(196, 181, 253, 0.28);
+  box-shadow: 0 10px 28px rgba(15, 23, 42, 0.04);
+}
+
+.navbar-inner {
+  max-width: 1440px;
+  height: 70px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-shrink: 0;
+  min-width: 260px;
+}
+
+.brand-icon-img {
+  width: 2.45rem;
+  height: 2.45rem;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+}
+
+.brand-name {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #0d1b2a;
+  letter-spacing: -0.03em;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.brand-name span {
+  color: #7b3ff2;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.65rem;
+  flex-wrap: nowrap;
+}
+
+.nav-button {
+  min-height: 2.55rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0 0.95rem;
+  border-radius: 0.75rem;
+  border: 1px solid transparent;
+  background-color: transparent;
+  color: #475569;
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.nav-button:hover {
+  background-color: rgba(124, 58, 237, 0.08);
+  color: #6d28d9;
+  border-color: rgba(124, 58, 237, 0.12);
+}
+
+.nav-button.active,
+.nav-button.active:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+  color: #ffffff;
+  border-color: rgba(124, 58, 237, 0.35);
+  box-shadow: 0 12px 24px rgba(79, 70, 229, 0.24);
+}
+
+.nav-button-logout {
+  color: #dc2626;
+  border-color: rgba(248, 113, 113, 0.32);
+}
+
+.nav-button-logout:hover {
+  background-color: rgba(254, 226, 226, 0.72);
+  color: #b91c1c;
+  border-color: rgba(248, 113, 113, 0.45);
+}
+
+.logout-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* =========================
+   Shared Navbar Responsive
+========================= */
+
+@media (max-width: 768px) {
+  .navbar {
+    height: auto;
+  }
+
+  .navbar-inner {
+    height: auto;
+    padding: 0.85rem 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .brand {
+    min-width: 0;
+  }
+
+  .nav-links {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+
+  .nav-button {
+    min-height: 2.45rem;
+  }
+}

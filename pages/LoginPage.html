@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - CommentInsight</title>
+  <link rel="icon" type="image/png" href="assets/commentinsight-icon.png" />
+  <link rel="stylesheet" href="LoginPage.css">
+</head>
+<body>
+  <div class="login-page">
+    <div class="login-card">
+      <a href="LandingPage.html" class="back-home-link" aria-label="Back to landing page">
+        <span>←</span>
+        Back to Home
+      </a>
+
+      <!-- Top Section -->
+      <div class="login-header">
+        <div class="hero-copy">
+          <h1>Welcome Back</h1>
+          <p>
+            Login to continue analyzing social media comments and reviewing
+            your saved sentiment results.
+          </p>
+        </div>
+      </div>
+
+      <!-- Form Section -->
+      <form id="loginForm" class="login-form" autocomplete="off">
+        <div id="errorMessage" class="alert alert-error hidden" role="alert"></div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+
+          <div class="input-shell">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 7.5L12 13.25L20 7.5"></path>
+                <rect x="4" y="6" width="16" height="12" rx="2"></rect>
+              </svg>
+            </span>
+
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="Enter your email address"
+              autocomplete="off"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="label-row">
+            <label for="password">Password</label>
+            <button type="button" id="forgotPassword" class="forgot-link">
+              Forgot password?
+            </button>
+          </div>
+
+          <div class="input-shell">
+            <span class="input-icon">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="6.5" y="10.5" width="11" height="8" rx="2"></rect>
+                <path d="M9 10.5V8.5C9 6.84 10.34 5.5 12 5.5C13.66 5.5 15 6.84 15 8.5V10.5"></path>
+              </svg>
+            </span>
+
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your password"
+              autocomplete="off"
+              required
+            >
+
+            <button type="button" id="togglePassword" class="password-toggle" aria-label="Show password">
+              <svg id="passwordIconHidden" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 3L21 21"></path>
+                <path d="M10.58 10.58A2 2 0 0 0 12 14a2 2 0 0 0 1.42-.58"></path>
+                <path d="M9.88 5.09A9.77 9.77 0 0 1 12 4.86c5 0 8.27 4.14 9.14 5.39-.36.52-1.18 1.61-2.43 2.67"></path>
+                <path d="M6.61 6.61C4.54 8.02 3.33 9.95 2.86 10.61c.87 1.25 4.14 5.39 9.14 5.39 1.52 0 2.89-.38 4.11-.96"></path>
+              </svg>
+
+              <svg id="passwordIconVisible" class="hidden" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2.86 12.61C3.73 11.36 7 7.22 12 7.22s8.27 4.14 9.14 5.39C20.27 13.86 17 18 12 18S3.73 13.86 2.86 12.61Z"></path>
+                <circle cx="12" cy="12.61" r="2.75"></circle>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <button id="loginButton" type="submit" class="btn btn-primary btn-full">
+          <span id="loginSpinner" class="spinner hidden"></span>
+          <span id="loginText">Login</span>
+          <span class="btn-arrow">→</span>
+        </button>
+
+        <div class="divider">
+          <span>OR</span>
+        </div>
+
+        <p class="form-footer">
+          Don’t have an account?
+          <a href="RegisterPage.html" class="link">Register</a>
+        </p>
+      </form>
+    </div>
+  </div>
+
+  <div id="toastContainer" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-analytics-compat.js"></script>
+  <script src="FirebaseKeys.js"></script>
+  <script src="FirebaseConfig.js"></script>
+  <script src="LoginPage.js"></script>
+</body>
+</html>
